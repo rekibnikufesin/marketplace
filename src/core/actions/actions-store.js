@@ -121,7 +121,13 @@ function addNewProduct(MarketplaceContract, storefrontid, name, desc, price, inv
 
 function editProduct(MarketplaceContract, id, name, desc, inventory, price, resolve, reject) {
     MarketplaceContract.deployed().then((marketplacecontract) => {
-        return marketplacecontract.editProduct(id, name, desc, inventory, price)
+        return marketplacecontract.editProduct(
+            id, 
+            name, 
+            desc, 
+            inventory, 
+            web3.utils.toWei(price, 'ether')
+        )
     })
     .then(result => {
         if (result) {
