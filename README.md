@@ -62,29 +62,45 @@ Step by step:
 
 #### Admin
 <img src="docs/admin.png" />
+
 - Head on over to [http://localhost:3000/#/admin](http://localhost:3000/#/admin)
+
 - 🐞 Known bug: Refresh the page to get it to recognize you as an admin
+
 - Add an admin or a store owner by adding the ethereum address in the text field and clicking the appropriate button. You can even add the current user as a Store Owner
+
 - Once your marketplace has earned some funds, they can be transferred using the yellow Ethereum button
+
 - Click the slider to take the marketplace offline. While offline, shoppers are unable to make purchases and Store Owners are unable to edit store fronts and products. They can however, transfer their funds out.
+
 - All transactions will provide a toaster-style pop-up with confirmation details once confirmed on the network
+
 
 #### Store Owner
 <img src="docs/storeowner.png">
 - As a Store Owner, head to [http://localhost:3000/#/store](http://localhost:3000/#/store)
+
 - 🐞 Known bug: Refresh the page to get it to recognize you as a Store Owner
+
 - 🐞 Known bug: There's some funkiness adding products. They always save, but the page isn't refreshing consistently. Need to look at when the promises fulfill and dispatch.
+
 - Add a new Store Front by filling out the details and clicking the button
+
 - Once the store front is added, you can add products to it by clicking the pencil icon
+
 - Much like the Ether button on the Admin page, you can click to transfer funds earned to your address
 
 
 #### Shopping in the Marketplace
 <img src="docs/shopper.png">
 - Take a shopping trip at [http://localhost:3000/#/home](http://localhost:3000/#/home)
+
 - Click the `BUY` button
+
 - Enter the quantity desired
+
 - Confirm purchase
+
 - Note how the `BUY` button switches to say `Pending...` until the transaction is confirmed on the network, at which point it switches back to `BUY` and a toaster pop-up displays the transaction id.
 
 
