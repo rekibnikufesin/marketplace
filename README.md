@@ -30,7 +30,7 @@ The contract owner receives 10% of the total sales. The amount earned is display
 
 ### Requirements
 
-- node.js v8.9.4
+- node.js v8.9.4 or higher (tested to 10.9.0)
 - Truffle framework v4.1.13
 - Solidity v0.4.24
 - git
