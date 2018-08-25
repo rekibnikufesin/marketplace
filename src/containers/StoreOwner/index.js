@@ -38,7 +38,7 @@ class StoreOwner extends Component {
         }
     }
 
-    componentDidLoad() {
+    componentDidMount() {
         if (this.props.marketplaceStatus === false) {
             this.setState({
                 open: true,

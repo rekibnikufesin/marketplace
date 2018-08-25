@@ -41,7 +41,14 @@ The contract owner receives 10% of the total sales. The amount earned is display
 ### Setup
 
 - Clone the repo `git@github.com:rekibnikufesin/marketplace.git`
-- TL;DR - `make build-run`
+
+- Got Docker and on Linux or OS X? Type `make run-new-marketplace`
+
+- Or `docker build -t marketplace:local .` followed by `docker run -p 3000:3000 marketplace:local`
+
+- To run without Docker: `make build-run`
+
+- Or see [Step by step](#step-by-step) below.
 
 Step by step:
 - Run `npm install` to install node.js dependencies
@@ -65,8 +72,6 @@ Step by step:
 
 - Head on over to [http://localhost:3000/#/admin](http://localhost:3000/#/admin)
 
-- 🐞 Known bug: Refresh the page to get it to recognize you as an admin
-
 - Add an admin or a store owner by adding the ethereum address in the text field and clicking the appropriate button. You can even add the current user as a Store Owner
 
 - Once your marketplace has earned some funds, they can be transferred using the yellow Ethereum button
@@ -79,8 +84,6 @@ Step by step:
 #### Store Owner
 <img src="docs/storeowner.png">
 - As a Store Owner, head to [http://localhost:3000/#/store](http://localhost:3000/#/store)
-
-- 🐞 Known bug: Refresh the page to get it to recognize you as a Store Owner
 
 - 🐞 Known bug: There's some funkiness adding products. They always save, but the page isn't refreshing consistently. Need to look at when the promises fulfill and dispatch.
 

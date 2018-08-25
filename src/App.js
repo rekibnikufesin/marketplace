@@ -48,15 +48,17 @@ class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.provider.web3Provider !== nextProps.provider.web3Provider) {
       this.getMarketplaceStatus()
+      this.getAdmins()
+      this.isStoreOwner()
+      this.getAllStoreFronts()
   }
     if (this.props.provider.account !== nextProps.provider.account) {
       // account changed, reload provider to set defaultAccount
       this.setProvider()
       this.getAdmins()
-      if (this.props.marketplaceStatus) {
-        this.isStoreOwner()
+      this.isStoreOwner()
+      if (this.props.admin.marketplaceStatus) {
         this.getAllStoreFronts()
-
       }
     }
   }

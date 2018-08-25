@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^1.4.3",
+    "@material-ui/icons": "^2.0.3",
     "keymirror": "^0.1.1",
     "openzeppelin-solidity": "1.11.0",
     "prop-types": "^15.6.2",
