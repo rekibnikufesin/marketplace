@@ -6,15 +6,15 @@ Hey! I'm Will Button and _this_ is my 2018 project submission.
 
 <img src="docs/itsame.png" width="400" />
 
-* You can learn about the app [here](#about).
-* Get the app installed, setup and running with [this](#setup)
-* Get a brief, guided tour of using the app in [Navigation](#navigation)
-* Tests are documents [here](#running-tests)
-* Solidity Contract design patterns are listed [here](#contract-design)
-* And the UI was built with React and Redux using [create-react-app](https://github.com/facebook/create-react-app) which posed a few interesting challenges that you can read about [here](#ui-design)
-* Avoiding common attacks is detailed [here](#common-attacks)
-* This was a big project, and there's a list of things I still need to do to create a professional, polished app. You can read about the [here](#to-do)
-* If you have questions, need help, or just want to connect- you can find my contact info [here](#help,-support,-contact)
+* [Overview](#about)
+* [Setup](#setup)
+* [Navigation](#navigation)
+* [Test Descriptions](#running-tests)
+* [Design Pattern Decisions](docs/design_pattern_decisions)
+* [UI Design](#ui-design)
+* [Avoiding Common Attacks](docs/avoiding_common_attacks.md)
+* [ToDo](#to-do)
+* [Contact Me](#help,-support,-contact)
 
 ## About (What does the app do?)
 
@@ -141,23 +141,6 @@ Tests here cover the following:
 
 - Making money is what this Marketplace is about. I created tests to ensure Store Owners can claim their funds and Admins can withdraw funds from the amount earned by the Marketplace via a 10% fee collected from all purchases.  An additional test exists here to ensure _only_ admins can withdraw funds from the Marketplace balance.
 
-## Design Patterns
-
-### Contract Design
-
-The contract was designed similar to how a comparable database-driven application might be. Relevant data  is grouped into structs, using mappings to get individual structs as necessary.
-
-Most functions are of the getter/setter variety: either getting a value or setting a value.
-
-One of the design struggles I faced was returning multiple items- for instance, returning _all_ the store fronts or _all_ the products for a give store front.
-
-I felt like there were two options:
-
-1. Deconstruct the structs and return them as an array of tuples
-2. Return an array of ids and get the individual items 1 at a time.
-
-I opted for the latter. Network calls are pretty cheap, and network speeds are fast. Gas is not, though- and deconstructing a large array of structs could consume a lot of gas. So I opted to make multiple short network calls (for free in some cases) vs. spending my customer's money on gas to deconstruct in the EVM.
-
 #### Libraries Implemented
 
 I implemented Open-Zeppelin's Safe Math library to avoid Integer Over/Under run attacks. I could also have implemented the Ownable library as well and saved myself the time creating my own `isOwner` modifier.
@@ -175,47 +158,6 @@ Redux was implemented to handle the latent network calls. By implements Redux ac
 ### Design patterns not used
 
 I reviewed design patterns around monetary functions. Some common patterns I didn't use included locking state for transactions until completed, implementing time delays before functions could be executed, or holding funds in escrow. Those have valid use cases but I felt like they weren't really needed for a simple shopping app like this.
-
-## Common Attacks
-
-### Reentrancy
-
-To prevent reentrency attacks, require statements are used and place as early in the function as possible. All internal functions are completed prior to executing Ether transfers.
-
-See:
-- withdrawMarketplaceFunds (line 100)
-- storeOwnerWithdraw (line 152)
-- productBought (line 268)
-
-### Cross-function Race Conditions
-
-No cross-function race conditions were identified
-
-### Transaction-Ordering Dependence (TOD) / Front Running
-
-No time-sensitive or order-dependent transactions are present
-
-### Integer Overflow and Underflow
-
-Multiple conditions exist for this attack: withdrawing funds, tracking inventory.
-
-To avoid this attack, the Open-Zeppelin SafeMath library was imported and used for all math operations.
-
-### Underflow in Depth: Storage Manipulation
-
-No areas identified
-
-### DoS with (Unexpected revert)
-
-This attack was avoided through the use of pull transfers vs. push payments
-
-### DoS with Block Gas Limit
-
-Gas limit block attacks were minimized through the implementation of getting individual struct items vs. returning arrays of tuples. The only exception to this might be by creating many store fronts, or many products in a single store. An array of uints is returned when called, but only the uint itself, not the details for the individual store front or products within. Those must be called individually.
-
-### Forcibly Sending Ether to a Contract
-
-In the event Ether is forcibly sent to a contract, the `forcedWithdraw` function can be used to withdraw the Ether. This function allows any amount (up to the amount held by the contract) to be withdrawn.
 
 ## To Do 
 
